@@ -57,7 +57,6 @@ var length int = 16
 var useableChars []string
 var characters charStruct
 var toUse toUseStruct
-var informedFallback bool
 var showLicense bool
 
 var w fyne.Window
@@ -132,10 +131,6 @@ func genPassword() (string, error) {
         password += useableChars[n]
     }
 
-    if !informedFallback && err != nil {
-        fmt.Printf("Falling back to math/rand: %v\n", err)
-    }
-
     return password, err
 }
 
@@ -191,8 +186,8 @@ func gui() {
     passEntry := widget.NewEntry()
     password, err := genPassword()
     if err != nil {
+        fmt.Printf("Falling back to math/rand: %v\n", err)
         dialog.ShowError(errors.New("Password generation failed\nusing secure method.\nFalling back to\nless secure method."), w)
-        informedFallback = true
     }
     passEntry.Text = password
 
