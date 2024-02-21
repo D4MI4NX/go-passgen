@@ -171,7 +171,7 @@ func gui() {
     })
     symbolCheck.SetChecked(true)
 
-    lengthLabel := widget.NewLabel("Lenght: ")
+    lengthLabel := widget.NewLabel("Length: ")
     lengthEntry := widget.NewEntry()
     lengthEntry.Text = strconv.Itoa(length)
     lengthEntry.OnChanged = func(number string) {
